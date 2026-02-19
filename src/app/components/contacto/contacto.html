@@ -1,0 +1,288 @@
+<!-- src/app/contacto/contacto.component.html -->
+<section class="contacto-section">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="header-badge">
+        <span>Contacto</span>
+      </div>
+      <h2>¿Necesitas ayuda con tu cultivo?</h2>
+      <p class="section-subtitle">
+        Nuestro equipo de especialistas está listo para atenderte y brindarte la mejor solución
+      </p>
+    </div>
+    
+    <div class="contacto-grid">
+      <!-- Información de contacto -->
+      <div class="contacto-info">
+        <div class="info-header">
+          <h3>Información de contacto</h3>
+          <p>Estamos disponibles para resolver tus dudas</p>
+        </div>
+        
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="info-details">
+              <h4>Teléfono</h4>
+              <a href="tel:{{ empresa.telefono }}">{{ empresa.telefono }}</a>
+              <span>Lunes a Viernes: 8:00 AM - 6:00 PM</span>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-details">
+              <h4>Email</h4>
+              <a href="mailto:{{ empresa.email }}">{{ empresa.email }}</a>
+              <span>Respuesta en menos de 24 horas</span>
+            </div>
+          </div>
+          
+          
+        </div>
+        
+        <!-- Horarios -->
+        <div class="horarios-card">
+          <h4><i class="fas fa-clock"></i> Horarios de atención</h4>
+          <div class="horarios-grid">
+            <div class="horario-item">
+              <span>Lunes - Viernes</span>
+              <strong>8:00 AM - 6:00 PM</strong>
+            </div>
+            <div class="horario-item">
+              <span>Sábados</span>
+              <strong>9:00 AM - 1:00 PM</strong>
+            </div>
+            <div class="horario-item emergencia">
+              <span>Emergencias</span>
+              <strong>24/7</strong>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Redes sociales -->
+        <div class="social-card">
+          <h4>Síguenos</h4>
+          <div class="social-links">
+            <a href="#" class="social-link facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link linkedin">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link youtube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Formulario de contacto -->
+      <div class="contacto-form-wrapper">
+        <div class="form-header">
+          <h3>Envíanos un mensaje</h3>
+          <p>Completa el formulario y te responderemos a la brevedad</p>
+        </div>
+        
+        <form (ngSubmit)="enviarMensaje()" #contactoForm="ngForm" class="contacto-form">
+          <!-- Nombre -->
+          <div class="form-group">
+            <label for="nombre">
+              Nombre completo <span class="required">*</span>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input 
+                type="text" 
+                id="nombre" 
+                name="nombre" 
+                [(ngModel)]="formData.nombre" 
+                required
+                #nombre="ngModel"
+                placeholder="Ej: Juan Pérez"
+                class="form-control"
+                [class.invalid]="nombre.invalid && nombre.touched">
+            </div>
+            <div class="error-message" *ngIf="nombre.invalid && nombre.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              El nombre es obligatorio
+            </div>
+          </div>
+          
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">
+              Correo electrónico <span class="required">*</span>
+            </label>
+            <div class="input-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="formData.email" 
+                required
+                email
+                #email="ngModel"
+                placeholder="ejemplo@correo.com"
+                class="form-control"
+                [class.invalid]="email.invalid && email.touched">
+            </div>
+            <div class="error-message" *ngIf="email.invalid && email.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              <span *ngIf="email.errors?.['required']">El email es obligatorio</span>
+              <span *ngIf="email.errors?.['email']">Ingresa un email válido</span>
+            </div>
+          </div>
+          
+          <!-- Teléfono -->
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <div class="input-wrapper">
+              <i class="fas fa-phone"></i>
+              <input 
+                type="tel" 
+                id="telefono" 
+                name="telefono" 
+                [(ngModel)]="formData.telefono" 
+                #telefono="ngModel"
+                placeholder="+57 300 123 4567"
+                class="form-control">
+            </div>
+          </div>
+          
+          <!-- Información del cultivo -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="hectareas">Hectáreas de cultivo</label>
+              <div class="input-wrapper">
+                <i class="fas fa-tractor"></i>
+                <select 
+                  id="hectareas" 
+                  name="hectareas" 
+                  [(ngModel)]="formData.hectareas"
+                  class="form-control">
+                  <option value="" disabled selected>Selecciona</option>
+                  <option value="1-10">1 - 10 hectáreas</option>
+                  <option value="11-50">11 - 50 hectáreas</option>
+                  <option value="51-100">51 - 100 hectáreas</option>
+                  <option value="101-500">101 - 500 hectáreas</option>
+                  <option value="500+">Más de 500 hectáreas</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="cultivo">Tipo de cultivo</label>
+              <div class="input-wrapper">
+                <i class="fas fa-seedling"></i>
+                <select 
+                  id="cultivo" 
+                  name="cultivo" 
+                  [(ngModel)]="formData.cultivo"
+                  class="form-control">
+                  <option value="" disabled selected>Selecciona</option>
+                  <option value="caña-azucar">Caña de azúcar</option>
+                  <option value="caña-panelera">Caña panelera</option>
+                  <option value="ambos">Ambos</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Mensaje -->
+          <div class="form-group">
+            <label for="mensaje">
+              Mensaje <span class="required">*</span>
+            </label>
+            <div class="textarea-wrapper">
+              <i class="fas fa-comment"></i>
+              <textarea 
+                id="mensaje" 
+                name="mensaje" 
+                [(ngModel)]="formData.mensaje" 
+                required
+                #mensaje="ngModel"
+                rows="4"
+                placeholder="Describe tu consulta o el problema que enfrentas en tu cultivo..."
+                class="form-control"
+                [class.invalid]="mensaje.invalid && mensaje.touched"></textarea>
+            </div>
+            <div class="error-message" *ngIf="mensaje.invalid && mensaje.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              El mensaje es obligatorio
+            </div>
+          </div>
+          
+          <!-- Términos -->
+          <div class="form-group terms-group">
+            <label class="checkbox-container">
+              <input 
+                type="checkbox" 
+                name="aceptaTerminos" 
+                [(ngModel)]="formData.aceptaTerminos" 
+                required
+                #terminos="ngModel">
+              <span class="checkmark"></span>
+              <span class="terms-text">
+                He leído y acepto la <a href="#">Política de Privacidad</a> y los 
+                <a href="#">Términos y Condiciones</a> <span class="required">*</span>
+              </span>
+            </label>
+            <div class="error-message" *ngIf="terminos.invalid && terminos.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              Debes aceptar los términos y condiciones
+            </div>
+          </div>
+          
+          <!-- Botón enviar -->
+          <button 
+            type="submit" 
+            class="btn-submit"
+            [disabled]="contactoForm.invalid || enviando">
+            <span *ngIf="!enviando">
+              <i class="fas fa-paper-plane"></i>
+              Enviar mensaje
+            </span>
+            <span *ngIf="enviando">
+              <i class="fas fa-spinner fa-spin"></i>
+              Enviando...
+            </span>
+          </button>
+          
+          <!-- Mensajes de éxito/error -->
+          <div class="alert alert-success" *ngIf="mensajeEnviado">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <strong>¡Mensaje enviado con éxito!</strong>
+              <p>Nos pondremos en contacto contigo en menos de 24 horas.</p>
+            </div>
+          </div>
+          
+          <div class="alert alert-error" *ngIf="errorEnvio">
+            <i class="fas fa-exclamation-circle"></i>
+            <div>
+              <strong>Error al enviar</strong>
+              <p>Por favor intenta nuevamente. Si el problema persiste, contáctanos por teléfono.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Mapa o ubicación -->
+    
+  </div>
+</section>

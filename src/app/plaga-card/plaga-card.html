@@ -1,0 +1,51 @@
+<!-- src/app/plaga-card/plaga-card.component.html -->
+<div class="plaga-card" [class.alto-riesgo]="plaga.riesgo === 'Alto'">
+  <!-- Encabezado -->
+  <div class="plaga-header">
+    <div class="plaga-titulo">
+      <h3>{{ plaga.nombre }}</h3>
+      <span class="riesgo-badge" [class]="getRiesgoClass()">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{ plaga.riesgo }}
+      </span>
+    </div>
+  </div>
+  
+  <!-- Nombre científico -->
+  <div class="plaga-cientifico">
+    <i class="fas fa-microscope"></i>
+    <em>{{ plaga.nombreCientifico }}</em>
+  </div>
+  
+  <!-- Descripción -->
+  <p class="plaga-descripcion">{{ plaga.descripcion }}</p>
+  
+  <!-- Daños -->
+  <div class="plaga-danos">
+    <div class="danos-header">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Daños principales:</span>
+    </div>
+    <p>{{ plaga.danos }}</p>
+  </div>
+  
+  <!-- Métodos de control -->
+  <div class="plaga-control">
+    <div class="control-header">
+      <i class="fas fa-check-circle"></i>
+      <span>Control recomendado:</span>
+    </div>
+    <ul class="control-lista">
+      <li *ngFor="let metodo of plaga.control">
+        <i class="fas fa-chevron-right"></i>
+        {{ metodo }}
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Alerta de riesgo -->
+  <div class="plaga-alerta" [class]="getRiesgoClass()">
+    <i class="fas fa-bell"></i>
+    <span>{{ getRecomendacion() }}</span>
+  </div>
+</div>

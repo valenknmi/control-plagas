@@ -1,0 +1,118 @@
+<!-- src/app/inicio/inicio.component.html -->
+<section class="inicio">
+  <!-- HERO SECTION CON CARRUSEL DE IMÁGENES DE CAÑA -->
+  <div class="hero hero-carrusel">
+    <!-- Carrusel de fondo -->
+    <div class="hero-carousel">
+      <div class="carousel-slide" 
+           *ngFor="let img of imagenesCana; let i = index" 
+           [class.active]="i === imagenActual">
+        <div class="carousel-image" [style.background-image]="'url(' + img.url + ')'">
+          <div class="carousel-overlay"></div>
+        </div>
+        <div class="carousel-caption">
+          <span>{{ img.titulo }}</span>
+        </div>
+      </div>
+      
+      <!-- Controles del carrusel -->
+      <button class="carousel-control prev" (click)="imagenAnterior()" aria-label="Imagen anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control next" (click)="siguienteImagen()" aria-label="Imagen siguiente">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <button *ngFor="let img of imagenesCana; let i = index" 
+                class="indicator" 
+                [class.active]="i === imagenActual"
+                (click)="seleccionarImagen(i)"
+                [attr.aria-label]="'Imagen ' + (i + 1)">
+        </button>
+      </div>
+    </div>
+    
+    <!-- Contenido del hero (sobre el carrusel) -->
+    <div class="hero-content overlay-content">
+      <div class="hero-badge">
+        <span class="badge-text">🌱 Especialistas en Caña de Azúcar</span>
+      </div>
+      
+      <h1 class="hero-title">
+        Detección de <span class="text-highlight">Plagas</span> en Caña de Azúcar
+      </h1>
+      
+      <p class="hero-description">
+        Protegemos tu cultivo con tecnología de punta y métodos sostenibles. 
+        Más de 18 años de experiencia en el manejo integrado de plagas.
+      </p>
+      
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-large" (click)="scrollToSeccion('contacto')">
+          <i class="fas fa-calendar-check"></i>
+          Solicitar Diagnóstico
+        </button>
+        <button class="btn btn-secondary btn-large" (click)="scrollToSeccion('plagas')">
+          <i class="fas fa-bug"></i>
+          Conocer Plagas
+        </button>
+      </div>
+      
+      <!-- Estadísticas (se mantienen igual) -->
+      
+    </div>
+  </div>
+  
+  <!-- BENEFICIOS SECTION (sin cambios) -->
+  <div class="beneficios">
+    <div class="container">
+      <div class="section-header">
+        <h2>¿Por qué elegirnos?</h2>
+        <p class="section-subtitle">Nuestro compromiso es tu éxito en el campo</p>
+      </div>
+      
+      <div class="beneficios-grid">
+        
+        <div class="beneficio-card">
+          <div class="beneficio-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Equipo Especializado</h3>
+          <p>Expertos en el area con gran experencia.</p>
+        </div>
+        
+        <div class="beneficio-card">
+          <div class="beneficio-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Resultados Garantizados</h3>
+          <p>Gran efectividad en nuestros programas de control integrado de plagas.</p>
+        </div>
+        
+        <div class="beneficio-card">
+          <div class="beneficio-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Sostenibilidad</h3>
+          <p>Métodos amigables con el ambiente que preservan la biodiversidad del cultivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA SECTION (sin cambios) -->
+  <div class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>¿Problemas con plagas en tu cultivo?</h2>
+        <p>Nuestros expertos pueden ayudarte a identificar y controlar cualquier plaga</p>
+        <button class="btn btn-primary btn-large" (click)="scrollToSeccion('contacto')">
+          <i class="fas fa-headset"></i>
+          Hablar con un especialista
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

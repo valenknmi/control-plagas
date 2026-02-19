@@ -1,0 +1,129 @@
+<!-- src/app/plagas-importantes/plagas-importantes.html -->
+<section class="plagas-section">
+  <div class="container">
+    <!-- HEADER -->
+    <div class="section-header">
+      <div class="header-badge">
+        <span>🔍 Identificación de Plagas</span>
+      </div>
+      <h2>Plagas Más Importantes en Caña de Azúcar</h2>
+      <p class="section-subtitle">
+        Conoce las principales amenazas para tu cultivo y cómo controlarlas efectivamente
+      </p>
+    </div>
+    
+    <!-- FILTROS Y BÚSQUEDA -->
+    <div class="plagas-filtros">
+      <div class="filtros-grid">
+        <!-- Pestañas de filtrado por riesgo -->
+        <div class="filtros-tabs">
+          <button 
+            class="filtro-btn" 
+            [class.active]="filtroActual === 'todas'"
+            (click)="filtrarPorRiesgo('todas')">
+            <i class="fas fa-th-large"></i>
+            Todas ({{ totalPlagas }})
+          </button>
+          <button 
+            class="filtro-btn riesgo-alto" 
+            [class.active]="filtroActual === 'Alto'"
+            (click)="filtrarPorRiesgo('Alto')">
+            <i class="fas fa-exclamation-triangle"></i>
+            Alto Riesgo ({{ plagasAltoRiesgo }})
+          </button>
+          <button 
+            class="filtro-btn riesgo-medio" 
+            [class.active]="filtroActual === 'Medio'"
+            (click)="filtrarPorRiesgo('Medio')">
+            <i class="fas fa-exclamation-circle"></i>
+            Medio Riesgo ({{ plagasMedioRiesgo }})
+          </button>
+          <button 
+            class="filtro-btn riesgo-bajo" 
+            [class.active]="filtroActual === 'Bajo'"
+            (click)="filtrarPorRiesgo('Bajo')">
+            <i class="fas fa-check-circle"></i>
+            Bajo Riesgo ({{ plagasBajoRiesgo }})
+          </button>
+        </div>
+        
+        <!-- Buscador -->
+        <div class="busqueda-container">
+          <div class="busqueda-wrapper">
+            <i class="fas fa-search"></i>
+            <input 
+              type="text" 
+              [(ngModel)]="searchTerm" 
+              placeholder="Buscar plaga por nombre, científico o descripción..."
+              class="busqueda-input">
+            <button *ngIf="searchTerm" class="clear-search" (click)="searchTerm = ''">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FILTROS ACTIVOS -->
+      <div class="filtros-activos" *ngIf="filtroActual !== 'todas' || searchTerm">
+        <span class="filtro-label">Filtros activos:</span>
+        <span class="filtro-tag" *ngIf="filtroActual !== 'todas'">
+          <i class="fas fa-filter"></i>
+          Riesgo: {{ filtroActual }}
+          <i class="fas fa-times" (click)="filtrarPorRiesgo('todas')"></i>
+        </span>
+        <span class="filtro-tag" *ngIf="searchTerm">
+          <i class="fas fa-search"></i>
+          Búsqueda: "{{ searchTerm }}"
+          <i class="fas fa-times" (click)="searchTerm = ''"></i>
+        </span>
+        <button class="limpiar-filtros" (click)="limpiarFiltros()">
+          <i class="fas fa-eraser"></i>
+          Limpiar todos
+        </button>
+      </div>
+    </div>
+    
+    <!-- CONTADOR DE RESULTADOS -->
+    <div class="resultados-info">
+      <div class="resultados-count">
+        <i class="fas fa-bug"></i>
+        <span>
+          Mostrando <strong>{{ plagasFiltradas.length }}</strong> de <strong>{{ totalPlagas }}</strong> plagas
+        </span>
+      </div>
+      <div class="resultados-orden" *ngIf="plagasFiltradas.length > 0">
+        <span class="orden-label">Ordenar por:</span>
+        <select class="orden-select">
+          <option value="nombre">Nombre</option>
+          <option value="riesgo">Riesgo</option>
+          <option value="cientifico">Nombre científico</option>
+        </select>
+      </div>
+    </div>
+    
+    <!-- GRID DE PLAGAS -->
+    <div class="plagas-grid" *ngIf="plagasFiltradas.length > 0">
+      <app-plaga-card 
+        *ngFor="let plaga of plagasFiltradas" 
+        [plaga]="plaga">
+      </app-plaga-card>
+    </div>
+    
+    <!-- SIN RESULTADOS -->
+    <div class="no-resultados" *ngIf="plagasFiltradas.length === 0">
+      <div class="no-resultados-icon">
+        <i class="fas fa-search"></i>
+      </div>
+      <h3>No se encontraron plagas</h3>
+      <p>Intenta con otros términos de búsqueda o filtros diferentes</p>
+      <button class="btn btn-primary" (click)="limpiarFiltros()">
+        <i class="fas fa-refresh"></i>
+        Ver todas las plagas
+      </button>
+    </div>
+    
+    
+    
+    
+  </div>
+</section>

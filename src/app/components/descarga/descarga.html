@@ -1,0 +1,250 @@
+<!-- src/app/descarga/descarga.component.html -->
+<section class="descarga-section">
+  <div class="container">
+    <!-- HEADER - App Móvil -->
+    <div class="app-header">
+      <div class="app-badge">
+        <span class="badge-nuevo">🚀 NUEVO</span>
+        <span class="badge-version">Versión {{ appInfo.version }}</span>
+      </div>
+      
+      <div class="app-presentacion">
+        <div class="app-icono-grande">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <div class="app-titulo">
+          <h1>{{ appInfo.nombre }}</h1>
+          <p class="app-slogan">Identifica plagas al instante con tu móvil</p>
+          <div class="app-calificacion">
+            <div class="estrellas">
+              <i *ngFor="let star of getEstrellas(4)" class="fas fa-star"></i>
+              <i *ngFor="let star of getEstrellasVacias(4)" class="far fa-star"></i>
+            </div>
+            <span class="calificacion-numero">{{ appInfo.calificacion }}</span>
+            <span class="calificacion-descargas">({{ appInfo.descargas }} descargas)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DE DESCARGA PRINCIPAL -->
+    <div class="descarga-principal">
+      <div class="qr-section">
+        <div class="qr-contenedor" (click)="escanearQR()">
+          <div class="qr-placeholder">
+            <i class="fas fa-qrcode"></i>
+            <span>Toca para escanear</span>
+          </div>
+        </div>
+        <div class="qr-texto">
+          <h3>Descarga la app móvil</h3>
+          <p>Escanea el código QR con tu teléfono</p>
+          <small>Disponible para Android y iOS</small>
+        </div>
+      </div>
+
+      <div class="botones-descarga">
+        <div class="plataforma-selector">
+          <button 
+            class="plataforma-btn" 
+            [class.active]="plataformaSeleccionada === 'android'"
+            (click)="seleccionarPlataforma('android')">
+            <i class="fab fa-android"></i>
+            Android
+          </button>
+          <button 
+            class="plataforma-btn" 
+            [class.active]="plataformaSeleccionada === 'ios'"
+            (click)="seleccionarPlataforma('ios')">
+            <i class="fab fa-apple"></i>
+            iOS
+          </button>
+        </div>
+
+        <button class="btn-descargar-app" (click)="descargarApp(plataformaSeleccionada)">
+          <i class="fas fa-download"></i>
+          Descargar para {{ plataformaSeleccionada === 'android' ? 'Android' : 'iOS' }}
+        </button>
+
+        <div class="app-info">
+          <span><i class="fas fa-hdd"></i> {{ appInfo.tamano }}</span>
+          <span><i class="fas fa-calendar"></i> Actualizada: {{ appInfo.ultimaActualizacion }}</span>
+          <span><i class="fas fa-mobile-alt"></i> {{ appInfo.dispositivos.join(' • ') }}</span>
+        </div>
+
+        <button class="btn-compartir" (click)="compartirApp()">
+          <i class="fas fa-share-alt"></i>
+          Compartir app
+        </button>
+      </div>
+    </div>
+
+    <!-- CARACTERÍSTICAS DE LA APP -->
+    <div class="caracteristicas-section">
+      <div class="section-header">
+        <h2>Todo lo que necesitas en una sola app</h2>
+        <p class="section-subtitle">Tecnología avanzada al alcance de tu mano</p>
+      </div>
+
+      <div class="caracteristicas-grid">
+        <div class="caracteristica-card" *ngFor="let item of caracteristicas">
+          <div class="caracteristica-icono">
+            <i [class]="item.icono"></i>
+          </div>
+          <h3>{{ item.titulo }}</h3>
+          <p>{{ item.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CÓMO FUNCIONA -->
+    <div class="como-funciona">
+      <h2>Comienza en 4 pasos</h2>
+      <div class="pasos-grid">
+        <div class="paso-card" *ngFor="let paso of pasosUso">
+          <div class="paso-numero">{{ paso.numero }}</div>
+          <h4>{{ paso.titulo }}</h4>
+          <p>{{ paso.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPTURAS DE PANTALLA -->
+    <div class="screenshots-section">
+      <h2>Conoce la interfaz</h2>
+      <div class="screenshots-slider">
+        <div class="screenshot-item">
+          <div class="screenshot-placeholder">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Identificador IA</span>
+          </div>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Mapas de calor</span>
+          </div>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-placeholder">
+            <i class="fas fa-chart-line"></i>
+            <span>Estadísticas</span>
+          </div>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-placeholder">
+            <i class="fas fa-bell"></i>
+            <span>Alertas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIOS -->
+    <div class="testimonios-section">
+      <h2>Lo que dicen nuestros usuarios</h2>
+      <div class="testimonios-grid">
+        <div class="testimonio-card" *ngFor="let test of testimonios">
+          <div class="testimonio-header">
+            <div class="testimonio-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="testimonio-info">
+              <h4>{{ test.nombre }}</h4>
+              <p>{{ test.cargo }}</p>
+            </div>
+          </div>
+          <div class="testimonio-estrellas">
+            <i *ngFor="let star of getEstrellas(test.calificacion)" class="fas fa-star"></i>
+            <i *ngFor="let star of getEstrellasVacias(test.calificacion)" class="far fa-star"></i>
+          </div>
+          <p class="testimonio-texto">"{{ test.texto }}"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <div class="faq-section">
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>¿La app funciona sin internet?</h4>
+          <p>Sí, puedes identificar plagas y acceder a la biblioteca técnica sin conexión.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Es completamente gratuita?</h4>
+          <p>Sí, la descarga y todas las funciones básicas son 100% gratuitas.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Cómo funciona el identificador de plagas?</h4>
+          <p>Usa inteligencia artificial entrenada con más de 50,000 imágenes de plagas en caña.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Puedo usar la app en varios dispositivos?</h4>
+          <p>Sí, tu cuenta sincroniza los datos en todos tus dispositivos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-section">
+      <div class="newsletter-content">
+        <div class="newsletter-icon">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <div class="newsletter-text">
+          <h3>Recibe novedades de la app</h3>
+          <p>Suscríbete y entérate de nuevas funcionalidades, actualizaciones y tips</p>
+        </div>
+        
+        <form (ngSubmit)="suscribirNewsletter()" #newsletterForm="ngForm" class="newsletter-form">
+          <div class="form-group">
+            <input 
+              type="email" 
+              name="email" 
+              [(ngModel)]="emailNewsletter" 
+              placeholder="Tu correo electrónico"
+              required
+              email
+              #email="ngModel"
+              class="newsletter-input">
+            <button type="submit" class="btn-suscribir" [disabled]="!newsletterForm.valid">
+              <i class="fas fa-paper-plane"></i>
+              Suscribirme
+            </button>
+          </div>
+          <div class="newsletter-mensaje" *ngIf="suscrito">
+            <i class="fas fa-check-circle"></i>
+            ¡Gracias por suscribirte!
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL QR -->
+  <div class="modal-overlay" *ngIf="codigoVisible" (click)="cerrarQR()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Escanea con tu teléfono</h3>
+        <button class="modal-close" (click)="cerrarQR()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body qr-modal-body">
+        <div class="qr-grande">
+          <i class="fas fa-qrcode"></i>
+        </div>
+        <p class="qr-instruccion">Abre la cámara de tu teléfono y apunta al código QR</p>
+        <div class="qr-links">
+          <a href="#" class="qr-link" (click)="descargarApp('android'); $event.preventDefault()">
+            <i class="fab fa-android"></i> Google Play
+          </a>
+          <a href="#" class="qr-link" (click)="descargarApp('ios'); $event.preventDefault()">
+            <i class="fab fa-apple"></i> App Store
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

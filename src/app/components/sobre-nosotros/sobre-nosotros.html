@@ -1,0 +1,63 @@
+<!-- src/app/sobre-nosotros/sobre-nosotros.component.html -->
+<section class="sobre-nosotros-section">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="header-badge">
+        <span>Nuestra Empresa</span>
+      </div>
+      <h2>Sobre AgroProtect Solutions</h2>
+      <p class="section-subtitle">
+         Protegiendo cultivos de caña con innovación, ciencia y sostenibilidad
+      </p>
+    </div>
+    
+    
+    
+    <!-- Misión y Visión -->
+    <div class="mision-vision-grid">
+      <div class="mv-card mision-card">
+        <div class="mv-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3>Misión</h3>
+        <p>{{ empresa.mision }}</p>
+        <div class="mv-footer">
+          <i class="fas fa-check-circle"></i>
+          <span>Compromiso con la excelencia</span>
+        </div>
+      </div>
+      
+      <div class="mv-card vision-card">
+        <div class="mv-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Visión</h3>
+        <p>{{ empresa.vision }}</p>
+        <div class="mv-footer">
+          <i class="fas fa-globe-americas"></i>
+          <span>Líderes en Latinoamérica 2030</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Valores -->
+    <div class="valores-section">
+      <h3>Nuestros Valores</h3>
+      <div class="valores-grid">
+        <div class="valor-card" *ngFor="let valor of empresa.valores; let i = index">
+          <div class="valor-icon">
+            <i [class]="valor.icono"></i>
+          </div>
+          <div class="valor-content">
+            <h4>{{ valor.nombre }}</h4>
+            <p>{{ valor.descripcion }}</p>
+          </div>
+          <div class="valor-number">0{{ i + 1 }}</div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</section>

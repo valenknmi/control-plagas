@@ -1,0 +1,73 @@
+<!-- src/app/header/header.component.html -->
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo-wrapper" (click)="scrollTo('inicio')">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Agro<span class="logo-highlight">Protect</span></span>
+      </div>
+      <span class="logo-tagline">Control de Plagas en Caña</span>
+    </div>
+
+    <!-- Navegación Desktop -->
+    <nav class="nav-desktop">
+      <ul class="nav-list">
+        <li><a (click)="scrollTo('inicio')" class="nav-link">Inicio</a></li>
+        <li><a (click)="scrollTo('plagas')" class="nav-link">Plagas</a></li>
+        <li><a (click)="scrollTo('sobre-nosotros')" class="nav-link">Sobre Nosotros</a></li>
+        <li><a (click)="scrollTo('contacto')" class="nav-link">Contacto</a></li>
+        <li><a (click)="scrollTo('descarga')" class="nav-link">Descarga</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botón de acción -->
+    <button class="btn-consulta" (click)="scrollTo('contacto')">
+      <i class="fas fa-phone-alt"></i>
+      <span>Consulta Gratuita</span>
+    </button>
+
+    <!-- Botón menú móvil -->
+    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuActive">
+      <i class="fas fa-bars" *ngIf="!menuActive"></i>
+      <i class="fas fa-times" *ngIf="menuActive"></i>
+    </button>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-menu" [class.active]="menuActive">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <i class="fas fa-leaf"></i>
+        <span>AgroProtect</span>
+      </div>
+      <button class="close-menu" (click)="toggleMenu()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <nav class="nav-mobile">
+      <ul>
+        <li><a (click)="scrollTo('inicio')"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a (click)="scrollTo('plagas')"><i class="fas fa-bug"></i> Plagas</a></li>
+        <li><a (click)="scrollTo('sobre-nosotros')"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+        <li><a (click)="scrollTo('contacto')"><i class="fas fa-envelope"></i> Contacto</a></li>
+        <li><a (click)="scrollTo('descarga')"><i class="fas fa-download"></i> Descarga</a></li>
+      </ul>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      <div class="mobile-contact">
+        <i class="fas fa-phone"></i>
+        <span>+1 (800) 555-1234</span>
+      </div>
+      <div class="mobile-contact">
+        <i class="fas fa-envelope"></i>
+        <span>info@agroprotect.com</span>
+      </div>
+      <button class="btn-consulta-mobile" (click)="scrollTo('contacto')">
+        Solicitar Asesoría
+      </button>
+    </div>
+  </div>
+</header>
