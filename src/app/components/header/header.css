@@ -316,3 +316,115 @@
     display: none;
   }
 }
+/* src/app/header/header.component.css */
+
+/* Logo wrapper */
+.logo-wrapper {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease;
+}
+
+.logo-wrapper:hover {
+  opacity: 0.9;
+}
+
+/* Contenedor del logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilos para la imagen del logo */
+.logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  border-radius: 8px; /* Opcional: si quieres bordes redondeados */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Texto del logo */
+.logo span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary, #2E7D32);
+}
+
+.logo-highlight {
+  color: var(--secondary, #FF9800);
+}
+
+/* Tagline debajo del logo */
+.logo-tagline {
+  font-size: 0.85rem;
+  color: var(--gray, #666);
+  margin-left: 57px; /* Ajusta según el ancho de tu logo + gap */
+  margin-top: -5px;
+  font-style: italic;
+}
+
+/* Estilos para el logo en menú móvil */
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.mobile-logo span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary, #2E7D32);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logo span {
+    font-size: 1.4rem;
+  }
+  
+  .logo-tagline {
+    font-size: 0.75rem;
+    margin-left: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .logo span {
+    font-size: 1.2rem;
+  }
+  
+  .logo-tagline {
+    display: none; /* Ocultar tagline en móviles muy pequeños */
+  }
+}
+
+/* Opción 2: Si prefieres solo la imagen sin texto en móvil */
+@media (max-width: 480px) {
+  .logo span {
+    display: none; /* Ocultar texto en móvil, solo mostrar imagen */
+  }
+  
+  .logo-tagline {
+    display: none;
+  }
+}

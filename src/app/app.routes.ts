@@ -1,17 +1,13 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { InicioComponent } from './components/inicio/inicio';
-import { PlagasImportantes } from './components/plagas-importantes/plagas-importantes';
-import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros';
-import { ContactoComponent } from './components/contacto/contacto';
-import { DescargaComponent } from './components/descarga/descarga';
+import { HomeComponent } from './components/home/home';
+import { Error404 } from './components/error404/error404';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: 'inicio', component: InicioComponent },
-  { path: 'plagas', component: PlagasImportantes },
-  { path: 'sobre-nosotros', component: SobreNosotrosComponent },
-  { path: 'contacto', component: ContactoComponent },
-  { path: 'descarga', component: DescargaComponent },
-  { path: '**', redirectTo: '/inicio' }
+  { path: '', component: HomeComponent },
+  { path: 'inicio', component: HomeComponent },
+  { path: 'plagas', component: HomeComponent },
+  { path: 'sobre-nosotros', component: HomeComponent },
+  { path: 'contacto', component: HomeComponent },
+  { path: 'descarga', component: HomeComponent },
+  { path: '**', component: Error404 }
 ];

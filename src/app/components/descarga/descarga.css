@@ -674,3 +674,66 @@
     grid-template-columns: 1fr;
   }
 }
+/* src/app/descarga/descarga.component.css */
+
+.app-presentacion {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.app-icono-grande {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary-light, #4CAF50), var(--primary-dark, #2E7D32));
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(46, 125, 50, 0.3);
+  overflow: hidden; /* Importante para que la imagen no se salga del contenedor */
+  padding: 15px; /* Espacio alrededor de la imagen */
+}
+
+.app-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Mantiene la proporción */
+  border-radius: 15px; /* Bordes redondeados para la imagen */
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.app-logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* Si la imagen tiene fondo blanco y quieres integrarla mejor */
+.app-logo-img.with-background {
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-presentacion {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .app-icono-grande {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-icono-grande {
+    width: 80px;
+    height: 80px;
+  }
+}

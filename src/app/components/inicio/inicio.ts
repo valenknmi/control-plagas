@@ -1,19 +1,18 @@
 // src/app/inicio/inicio.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { DatosEmpresaService } from '../../services/datos-empresa';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './inicio.html',
   styleUrls: ['./inicio.css']
 })
-export class InicioComponent implements OnInit, OnDestroy {
+export class Inicio implements OnInit, OnDestroy {
   estadisticas: any[] = [];
-  
+
   // 📸 IMÁGENES DE CAÑA DE AZÚCAR - Unsplash (libres de derechos)
   imagenesCana = [
     {
@@ -46,7 +45,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   imagenActual = 0;
   private intervalo: any;
 
-  constructor(private datosService: DatosEmpresaService) {}
+  constructor(private datosService: DatosEmpresaService) { }
 
   ngOnInit() {
     this.estadisticas = this.datosService.getEstadisticas();

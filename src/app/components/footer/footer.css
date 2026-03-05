@@ -209,3 +209,39 @@
     flex-wrap: wrap;
   }
 }
+/* src/app/footer/footer.component.css */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo-img {
+  width: 40px;  /* Ajusta según necesites */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Si quieres que el logo tenga un tamaño específico */
+.footer-logo {
+  /* Opción 1: Tamaño fijo */
+  .logo-img {
+    width: 45px;
+    height: 45px;
+  }
+  
+  /* Opción 2: Tamaño responsive */
+  @media (max-width: 768px) {
+    .logo-img {
+      width: 35px;
+    }
+  }
+}
+
+/* Para mantener el texto al lado del logo */
+.footer-logo span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}

@@ -1,15 +1,17 @@
 <!-- src/app/header/header.component.html -->
 <header class="header" [class.scrolled]="isScrolled">
   <div class="container">
-    <!-- Logo -->
+    <!-- Logo con imagen -->
     <div class="logo-wrapper" (click)="scrollTo('inicio')">
       <div class="logo">
-        <i class="fas fa-leaf"></i>
+        <!-- CAMBIO AQUÍ: Reemplazar el ícono por la imagen -->
+        <img src="assets/images/plaga.jpeg" alt="AgroProtect" class="logo-img">
         <span>Agro<span class="logo-highlight">Protect</span></span>
       </div>
       <span class="logo-tagline">Control de Plagas en Caña</span>
     </div>
 
+    <!-- Resto del header igual... -->
     <!-- Navegación Desktop -->
     <nav class="nav-desktop">
       <ul class="nav-list">
@@ -38,7 +40,8 @@
   <div class="mobile-menu" [class.active]="menuActive">
     <div class="mobile-menu-header">
       <div class="mobile-logo">
-        <i class="fas fa-leaf"></i>
+        <!-- TAMBIÉN CAMBIA ESTO EN EL MENÚ MÓVIL -->
+        <img src="assets/images/plaga.jpeg" alt="AgroProtect" class="mobile-logo-img">
         <span>AgroProtect</span>
       </div>
       <button class="close-menu" (click)="toggleMenu()">
@@ -46,6 +49,7 @@
       </button>
     </div>
 
+    <!-- Resto del menú móvil igual -->
     <nav class="nav-mobile">
       <ul>
         <li><a (click)="scrollTo('inicio')"><i class="fas fa-home"></i> Inicio</a></li>
