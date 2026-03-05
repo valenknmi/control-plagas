@@ -7,7 +7,7 @@
         <span class="badge-nuevo">🚀 NUEVO</span>
         <span class="badge-version">Versión {{ appInfo.version }}</span>
       </div>
-      
+
       <div class="app-presentacion">
         <!-- CAMBIO AQUÍ: Reemplazar el ícono por la imagen -->
         <div class="app-icono-grande">
@@ -47,16 +47,12 @@
 
       <div class="botones-descarga">
         <div class="plataforma-selector">
-          <button 
-            class="plataforma-btn" 
-            [class.active]="plataformaSeleccionada === 'android'"
+          <button class="plataforma-btn" [class.active]="plataformaSeleccionada === 'android'"
             (click)="seleccionarPlataforma('android')">
             <i class="fab fa-android"></i>
             Android
           </button>
-          <button 
-            class="plataforma-btn" 
-            [class.active]="plataformaSeleccionada === 'ios'"
+          <button class="plataforma-btn" [class.active]="plataformaSeleccionada === 'ios'"
             (click)="seleccionarPlataforma('ios')">
             <i class="fab fa-apple"></i>
             iOS
@@ -111,28 +107,50 @@
       </div>
     </div>
 
-    
+
 
     <!-- TESTIMONIOS -->
     <div class="testimonios-section">
       <h2>Lo que dicen nuestros usuarios</h2>
-      <div class="testimonios-grid">
-        <div class="testimonio-card" *ngFor="let test of testimonios">
-          <div class="testimonio-header">
-            <div class="testimonio-avatar">
-              <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="testimonio-info">
-              <h4>{{ test.nombre }}</h4>
-              <p>{{ test.cargo }}</p>
+      <div class="carrusel-testimonios">
+        <button class="carrusel-btn carr-prev" (click)="anteriorTestimonio()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carrusel-contenedor">
+          <!-- Transición ajustada: se mueve del ancho de 1 tarjeta (33.333% de la vista)
+               por cada incremento del índice -->
+          <div class="carrusel-track"
+            [style.transform]="'translateX(' + (-indiceTestimonioVisible * (100 / itemsPorVista)) + '%)'">
+            <div class="testimonio-card" *ngFor="let test of testimonios; let i = index"
+              [class.testimonio-central]="esTestimonioCentral(i)">
+              <div class="testimonio-header">
+                <div class="testimonio-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="testimonio-info">
+                  <h4>{{ test.nombre }}</h4>
+                  <p>{{ test.cargo }}</p>
+                </div>
+              </div>
+              <div class="testimonio-estrellas">
+                <i *ngFor="let star of getEstrellas(test.calificacion)" class="fas fa-star"></i>
+                <i *ngFor="let star of getEstrellasVacias(test.calificacion)" class="far fa-star"></i>
+              </div>
+              <p class="testimonio-texto">"{{ test.texto }}"</p>
             </div>
           </div>
-          <div class="testimonio-estrellas">
-            <i *ngFor="let star of getEstrellas(test.calificacion)" class="fas fa-star"></i>
-            <i *ngFor="let star of getEstrellasVacias(test.calificacion)" class="far fa-star"></i>
-          </div>
-          <p class="testimonio-texto">"{{ test.texto }}"</p>
         </div>
+
+        <button class="carrusel-btn carr-next" (click)="siguienteTestimonio()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="carrusel-indicadores">
+        <button *ngFor="let pagina of paginasTotales" class="indicador-punto"
+          [class.activo]="pagina === indiceTestimonioVisible" (click)="saltarA(pagina)">
+        </button>
       </div>
     </div>
 
@@ -169,18 +187,11 @@
           <h3>Recibe novedades de la app</h3>
           <p>Suscríbete y entérate de nuevas funcionalidades, actualizaciones y tips</p>
         </div>
-        
+
         <form (ngSubmit)="suscribirNewsletter()" #newsletterForm="ngForm" class="newsletter-form">
           <div class="form-group">
-            <input 
-              type="email" 
-              name="email" 
-              [(ngModel)]="emailNewsletter" 
-              placeholder="Tu correo electrónico"
-              required
-              email
-              #email="ngModel"
-              class="newsletter-input">
+            <input type="email" name="email" [(ngModel)]="emailNewsletter" placeholder="Tu correo electrónico" required
+              email #email="ngModel" class="newsletter-input">
             <button type="submit" class="btn-suscribir" [disabled]="!newsletterForm.valid">
               <i class="fas fa-paper-plane"></i>
               Suscribirme

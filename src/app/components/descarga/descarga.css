@@ -479,33 +479,127 @@
 }
 
 .testimonios-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+  display: none;
+  /* Ocultamos el grid antiguo por si quedan restos */
+}
+
+/* Carrusel de Testimonios */
+.carrusel-testimonios {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carrusel-contenedor {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.carrusel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* Para que haya espacio entre tarjetas de 20px sin desajustar el grid */
+  gap: 20px;
+}
+
+.carrusel-track .testimonio-card {
+  /* Se restan 40px en base a los gaps (20px * 2 huecos = 40px) 
+     dividido entre 3 elementos */
+  min-width: calc((100% - 40px) / 3);
+  box-sizing: border-box;
 }
 
 .testimonio-card {
   background: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  text-align: center;
+  flex: 1;
+  /* Efecto 3D para deslizar: las q no estén centradas, son más pequeñas */
+  transform: scale(0.85);
+  opacity: 0.6;
+  transition: all 0.5s ease;
+  border: 2px solid transparent;
+}
+
+/* Tarjeta Central del carrusel destacada */
+.testimonio-central {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 15px 35px rgba(76, 175, 80, 0.2);
+  border-color: #4caf50;
+  z-index: 5;
+}
+
+.carrusel-btn {
+  background: white;
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.carrusel-btn:hover {
+  background: #4caf50;
+  color: white;
+  transform: scale(1.1);
+}
+
+.carrusel-indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.indicador-punto {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.indicador-punto.activo {
+  background: #4caf50;
+  transform: scale(1.3);
 }
 
 .testimonio-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .testimonio-avatar i {
-  font-size: 3rem;
+  font-size: 4rem;
   color: #4caf50;
 }
 
 .testimonio-info h4 {
   color: #2d5a27;
   margin-bottom: 5px;
+  font-size: 1.3rem;
 }
 
 .testimonio-info p {
@@ -720,6 +814,11 @@
   .app-presentacion {
     flex-direction: column;
   }
+
+  /* Ajustar a 2 ítems en tablets */
+  .carrusel-track .testimonio-card {
+    min-width: calc((100% - 20px) / 2);
+  }
 }
 
 @media (max-width: 768px) {
@@ -744,6 +843,11 @@
   .screenshots-slider {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Ajustar a 1 ítem en móviles */
+  .carrusel-track .testimonio-card {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -759,6 +863,15 @@
 
   .screenshots-slider {
     grid-template-columns: 1fr;
+  }
+
+  .carrusel-btn {
+    display: none;
+    /* Ocultamos flechas en móvil para usar más área para texto */
+  }
+
+  .testimonio-card {
+    padding: 20px;
   }
 }
 

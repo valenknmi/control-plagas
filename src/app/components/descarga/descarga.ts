@@ -16,7 +16,7 @@ export class DescargaComponent implements OnInit {
   suscrito: boolean = false;
   plataformaSeleccionada: string = 'android';
   codigoVisible: boolean = false;
-  
+
   // Información de la app móvil
   appInfo = {
     nombre: 'AgroProtect Cana',
@@ -45,13 +45,13 @@ export class DescargaComponent implements OnInit {
       titulo: 'Alertas Tempranas',
       descripcion: 'Recibe notificaciones cuando se detecten condiciones propicias para plagas'
     },
-    
+
     {
       icono: 'fas fa-book-open',
       titulo: 'Biblioteca Técnica',
       descripcion: 'Accede a guías y manuales sin conexión a internet'
     },
-    
+
   ];
 
   // Pasos para usar la app
@@ -78,9 +78,9 @@ export class DescargaComponent implements OnInit {
     }
   ];
 
-  constructor(private datosService: DatosEmpresaService) {}
+  constructor(private datosService: DatosEmpresaService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Seleccionar plataforma
   seleccionarPlataforma(plataforma: string) {
@@ -134,14 +134,13 @@ export class DescargaComponent implements OnInit {
     if (this.emailNewsletter && this.emailNewsletter.includes('@')) {
       this.suscrito = true;
       this.emailNewsletter = '';
-      
+
       setTimeout(() => {
         this.suscrito = false;
       }, 5000);
     }
   }
 
-  // Testimonios
   testimonios = [
     {
       nombre: 'Carlos Martínez',
@@ -163,8 +162,54 @@ export class DescargaComponent implements OnInit {
       foto: 'assets/testimonios/jose.jpg',
       texto: 'Toda la información de mis cultivos en un solo lugar. Los mapas de incidencia son muy útiles.',
       calificacion: 4
+    },
+    {
+      nombre: 'María Fernández',
+      cargo: 'Productora Independiente',
+      foto: 'assets/testimonios/maria.jpg',
+      texto: 'Desde que uso AgroProtect, la gestión de tratamientos se ha optimizado un montón. La interfaz es súper intuitiva.',
+      calificacion: 5
+    },
+    {
+      nombre: 'Jorge Ramírez',
+      cargo: 'Técnico de Campo',
+      foto: 'assets/testimonios/jorge.jpg',
+      texto: 'La biblioteca técnica offline es una maravilla cuando estoy en zonas sin cobertura de red. ¡Recomendada!',
+      calificacion: 5
+    },
+    {
+      nombre: 'Luis Silva',
+      cargo: 'Coordinador Agrícola',
+      foto: 'assets/testimonios/luis.jpg',
+      texto: 'Poder registrar las parcelas geolocalizadas nos da un control absoluto del terreno. Hemos reducido daños drásticamente.',
+      calificacion: 4
     }
   ];
+
+  indiceTestimonioVisible: number = 0;
+  itemsPorVista: number = 3;
+
+  get paginasTotales(): number[] {
+    return Array(this.testimonios.length).fill(0).map((x, i) => i);
+  }
+
+  siguienteTestimonio() {
+    this.indiceTestimonioVisible = (this.indiceTestimonioVisible + 1) % this.testimonios.length;
+  }
+
+  anteriorTestimonio() {
+    this.indiceTestimonioVisible = (this.indiceTestimonioVisible - 1 + this.testimonios.length) % this.testimonios.length;
+  }
+
+  saltarA(indice: number) {
+    this.indiceTestimonioVisible = indice;
+  }
+
+  // Para las clases dinámicas de CSS (centrado vs costados)
+  esTestimonioCentral(index: number): boolean {
+    // El central es el que le sigue al índice visible actual
+    return index === (this.indiceTestimonioVisible + 1) % this.testimonios.length;
+  }
 
   getEstrellas(calificacion: number): string[] {
     return Array(calificacion).fill('fas fa-star');
