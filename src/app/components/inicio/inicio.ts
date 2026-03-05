@@ -21,28 +21,28 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
       title1: 'CULTIVOS',
       title2: 'PROTEGIDOS',
       description: 'Protegemos tu cultivo con tecnología de punta y métodos sostenibles. Experiencia en el manejo integrado de plagas.',
-      image: 'https://www.gob.mx/cms/uploads/article/main_image/21308/DOF_Precio_referencia_15-16.jpg'
+      image: 'https://images.unsplash.com/photo-1585155113372-6c1808141bf3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       place: 'Caña de Azúcar',
       title1: 'COSECHA',
       title2: 'ABUNDANTE',
       description: 'Maximizamos el rendimiento de tus cultivos de caña mediante un control eficiente y seguro contra todo tipo de plagas.',
-      image: 'https://eos.com/wp-content/uploads/2022/11/growing-sugar-cane.jpg.webp'
+      image: 'https://images.unsplash.com/photo-1586315776885-a176ffccbe01?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       place: 'Caña de Azúcar',
       title1: 'MONITOREO',
       title2: 'CONSTANTE',
       description: 'Detección temprana y precisa de plagas para prevenir daños y asegurar la calidad del producto final.',
-      image: 'https://www.editorialderiego.com/wp-content/uploads/2024/01/CanaAzucar_01.jpg'
+      image: 'https://images.unsplash.com/photo-1566735049879-444f282d77f9?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       place: 'Caña de Azúcar',
       title1: 'SALUD',
       title2: 'VEGETAL',
       description: 'Mantenemos un equilibrio ecológico, favoreciendo la salud general de las plantas en cada etapa del cultivo.',
-      image: 'https://masterlab.com.mx/wp-content/uploads/2024/10/ANALISIS-DE-CULTIVOS-DE-CANA-DE-AZUCAR-1024x576.png'
+      image: 'https://images.unsplash.com/photo-1719424668314-a0def541377b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNhJUMzJUIxYSUyMGRlJTIwYXp1Y2FyfGVufDB8fDB8fHww'
     },
     {
       place: 'Caña de Azúcar',
