@@ -1,70 +1,91 @@
 <!-- src/app/inicio/inicio.component.html -->
 <section class="inicio">
-  <!-- HERO SECTION CON CARRUSEL DE IMÁGENES DE CAÑA -->
-  <div class="hero hero-carrusel">
-    <!-- Carrusel de fondo -->
-    <div class="hero-carousel">
-      <div class="carousel-slide" 
-           *ngFor="let img of imagenesCana; let i = index" 
-           [class.active]="i === imagenActual">
-        <div class="carousel-image" [style.background-image]="'url(' + img.url + ')'">
-          <div class="carousel-overlay"></div>
-        </div>
-        <div class="carousel-caption">
-          <span>{{ img.titulo }}</span>
-        </div>
-      </div>
-      
-      <!-- Controles del carrusel -->
-      <button class="carousel-control prev" (click)="imagenAnterior()" aria-label="Imagen anterior">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="carousel-control next" (click)="siguienteImagen()" aria-label="Imagen siguiente">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      
-      <!-- Indicadores -->
-      <div class="carousel-indicators">
-        <button *ngFor="let img of imagenesCana; let i = index" 
-                class="indicator" 
-                [class.active]="i === imagenActual"
-                (click)="seleccionarImagen(i)"
-                [attr.aria-label]="'Imagen ' + (i + 1)">
-        </button>
+  <!-- GSAP HERO SECTION CON CARRUSEL DE IMÁGENES -->
+  <div class="hero hero-gsap">
+    <div class="indicator"></div>
+
+    <div id="demo">
+      <div *ngFor="let img of imagenesCana; let i = index" class="card" [id]="'card' + i"
+        [style.background-image]="'url(' + img.image + ')'"></div>
+      <div *ngFor="let img of imagenesCana; let i = index" class="card-content" [id]="'card-content-' + i">
+        <div class="content-start"></div>
+        <div class="content-place">{{img.place}}</div>
+        <div class="content-title-1">{{img.title1}}</div>
+        <div class="content-title-2">{{img.title2}}</div>
       </div>
     </div>
-    
-    <!-- Contenido del hero (sobre el carrusel) -->
-    <div class="hero-content overlay-content">
-      <div class="hero-badge">
-        <span class="badge-text">🌱 Especialistas en Caña de Azúcar</span>
+
+    <!-- Active Detail Box -->
+    <div class="details" id="details-even">
+      <div class="place-box">
+        <div class="text"></div>
       </div>
-      
-      <h1 class="hero-title">
-        Detección de <span class="text-highlight">Plagas</span> en Caña de Azúcar
-      </h1>
-      
-      <p class="hero-description">
-        Protegemos tu cultivo con tecnología de punta y métodos sostenibles. 
-        Experiencia en el manejo integrado de plagas.
-      </p>
-      
-      <div class="hero-actions">
-        <button class="btn btn-primary btn-large" (click)="scrollToSeccion('contacto')">
-          <i class="fas fa-calendar-check"></i>
-          Solicitar Diagnóstico
-        </button>
-        <button class="btn btn-secondary btn-large" (click)="scrollToSeccion('plagas')">
-          <i class="fas fa-bug"></i>
-          Conocer Plagas
-        </button>
+      <div class="title-box-1">
+        <div class="title-1"></div>
       </div>
-      
-      <!-- Estadísticas (se mantienen igual) -->
-      
+      <div class="title-box-2">
+        <div class="title-2"></div>
+      </div>
+      <div class="desc"></div>
+      <div class="cta">
+        <button class="bookmark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+        <button class="discover" (click)="scrollToSeccion('contacto')">Solicitar Diagnóstico</button>
+      </div>
     </div>
+
+    <div class="details" id="details-odd">
+      <div class="place-box">
+        <div class="text"></div>
+      </div>
+      <div class="title-box-1">
+        <div class="title-1"></div>
+      </div>
+      <div class="title-box-2">
+        <div class="title-2"></div>
+      </div>
+      <div class="desc"></div>
+      <div class="cta">
+        <button class="bookmark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+        <button class="discover" (click)="scrollToSeccion('contacto')">Solicitar Diagnóstico</button>
+      </div>
+    </div>
+
+    <div class="pagination" id="pagination">
+      <div class="arrow arrow-left" (click)="prevSlide()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </div>
+      <div class="arrow arrow-right" (click)="nextSlide()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </div>
+      <div class="progress-sub-container">
+        <div class="progress-sub-background">
+          <div class="progress-sub-foreground"></div>
+        </div>
+      </div>
+      <div class="slide-numbers" id="slide-numbers">
+        <div *ngFor="let img of imagenesCana; let i = index" class="item" [id]="'slide-item-' + i">{{i + 1}}</div>
+      </div>
+    </div>
+
+    <div class="cover"></div>
   </div>
-  
+
   <!-- BENEFICIOS SECTION (sin cambios) -->
   <div class="beneficios">
     <div class="container">
@@ -72,9 +93,9 @@
         <h2>¿Por qué elegirnos?</h2>
         <p class="section-subtitle">Nuestro compromiso es tu éxito en el campo</p>
       </div>
-      
+
       <div class="beneficios-grid">
-        
+
         <div class="beneficio-card">
           <div class="beneficio-icon">
             <i class="fas fa-users"></i>
@@ -82,7 +103,7 @@
           <h3>Equipo Especializado</h3>
           <p>Expertos en el area con gran experencia.</p>
         </div>
-        
+
         <div class="beneficio-card">
           <div class="beneficio-icon">
             <i class="fas fa-chart-line"></i>
@@ -90,7 +111,7 @@
           <h3>Resultados Garantizados</h3>
           <p>Gran efectividad en nuestros programas de control integrado de plagas.</p>
         </div>
-        
+
         <div class="beneficio-card">
           <div class="beneficio-icon">
             <i class="fas fa-leaf"></i>
@@ -101,6 +122,6 @@
       </div>
     </div>
   </div>
-  
-  
+
+
 </section>

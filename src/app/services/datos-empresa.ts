@@ -85,7 +85,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Diatraea saccharalis',
         descripcion: 'Larva que perfora los tallos de la caña, causando daños internos y reduciendo significativamente la producción de azúcar.',
         danos: 'Pérdidas de hasta 30% en rendimiento, reducción de calidad del jugo, quebrantamiento de tallos',
-        imagen: 'barrenador.jpg',
+        imagen: 'https://images.unsplash.com/photo-1541416751-24fb6babb4a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Alto',
         control: ['Control biológico con Trichogramma', 'Trampas de feromonas', 'Variedades resistentes']
       },
@@ -95,7 +95,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Spodoptera frugiperda',
         descripcion: 'Larva que se alimenta del cogollo y hojas jóvenes, afectando el crecimiento y desarrollo de la planta.',
         danos: 'Defoliación severa, muerte de plantas jóvenes, pérdida de vigor',
-        imagen: 'cogollero.jpg',
+        imagen: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Alto',
         control: ['Monitoreo temprano', 'Control biológico', 'Manejo cultural']
       },
@@ -105,7 +105,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Sipha flava',
         descripcion: 'Insecto chupador que debilita la planta y transmite enfermedades virales.',
         danos: 'Amarillamiento, reducción de crecimiento, transmisión de virus',
-        imagen: 'pulgon.jpg',
+        imagen: 'https://images.unsplash.com/photo-1604736780718-2ad1e5ab37d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Medio',
         control: ['Control biológico con depredadores', 'Manejo de hospederos', 'Aplicaciones selectivas']
       },
@@ -115,7 +115,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Mahanarva fimbriolata',
         descripcion: 'Produce una espuma salival característica mientras se alimenta de la savia de la planta.',
         danos: 'Debilitamiento general, menor contenido de sacarosa',
-        imagen: 'salivazo.jpg',
+        imagen: 'https://images.unsplash.com/photo-1602127271966-22aee4eb2338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Medio',
         control: ['Control biológico con hongos', 'Manejo de residuos', 'Rotación de cultivos']
       },
@@ -125,7 +125,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Familia: Acrididae',
         descripcion: 'Insectos saltadores que se alimentan de hojas y tallos, causando defoliación.',
         danos: 'Defoliación completa en infestaciones severas',
-        imagen: 'chapulin.jpg',
+        imagen: 'https://images.unsplash.com/photo-1596541678859-99f6ba88cc5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Alto',
         control: ['Barreras físicas', 'Control biológico', 'Aplicaciones localizadas']
       },
@@ -135,7 +135,7 @@ export class DatosEmpresaService {
         nombreCientifico: 'Strategus spp.',
         descripcion: 'Larvas que se alimentan de raíces, afectando la absorción de nutrientes.',
         danos: 'Muerte de plantas, reducción del stand, susceptibilidad a vientos',
-        imagen: 'rinoceronte.jpg',
+        imagen: 'https://images.unsplash.com/photo-1588636598585-cd2649b6b74e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         riesgo: 'Medio',
         control: ['Trampas de luz', 'Manejo de materia orgánica', 'Control biológico']
       }
