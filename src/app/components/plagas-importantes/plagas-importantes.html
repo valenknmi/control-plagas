@@ -4,7 +4,7 @@
     <main class="main-swiper-layout">
 
       <!-- Lado Izquierdo: Textos y Filtros -->
-      <div class="left-panel">
+      <div class="left-panel" scrollReveal scrollRevealDirection="left" scrollRevealDistance="40px">
         <div class="header-badge">
           <span>🔍 Identificación de Plagas</span>
         </div>
@@ -50,7 +50,8 @@
       </div>
 
       <!-- Lado Derecho: Swiper -->
-      <div class="swiper" *ngIf="plagasFiltradas.length > 0">
+      <div class="swiper" *ngIf="plagasFiltradas.length > 0" scrollReveal scrollRevealDirection="right"
+        scrollRevealDistance="40px" scrollRevealDelay="0.2s">
         <div class="swiper-wrapper">
           <div class="swiper-slide custom-plaga-slide" *ngFor="let plaga of plagasFiltradas"
             [ngClass]="'borde-' + plaga.riesgo.toLowerCase()">

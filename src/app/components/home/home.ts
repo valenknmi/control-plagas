@@ -8,23 +8,25 @@ import { SobreNosotrosComponent } from '../sobre-nosotros/sobre-nosotros';
 import { ContactoComponent } from '../contacto/contacto';
 import { DescargaComponent } from '../descarga/descarga';
 import { FooterComponent } from '../footer/footer';
+import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        HeaderComponent,
-        Inicio,
-        PlagasImportantes,
-        SobreNosotrosComponent,
-        ContactoComponent,
-        DescargaComponent,
-        FooterComponent
-    ],
-    templateUrl: './home.html',
-    styles: [`
+  selector: 'app-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    Inicio,
+    PlagasImportantes,
+    SobreNosotrosComponent,
+    ContactoComponent,
+    DescargaComponent,
+    FooterComponent,
+    ScrollRevealDirective
+  ],
+  templateUrl: './home.html',
+  styles: [`
     .home-container {
       font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
@@ -40,5 +42,5 @@ import { FooterComponent } from '../footer/footer';
   `]
 })
 export class HomeComponent implements OnInit {
-    ngOnInit() { }
+  ngOnInit() { }
 }

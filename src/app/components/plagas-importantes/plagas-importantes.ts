@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, ChangeDetector
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DatosEmpresaService, Plaga } from '../../services/datos-empresa';
+import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 import { PlagaCardComponent } from '../../plaga-card/plaga-card';
 import Swiper from 'swiper';
 import { EffectCoverflow, Pagination, Keyboard, Mousewheel, Navigation } from 'swiper/modules';
@@ -10,7 +11,7 @@ import { EffectCoverflow, Pagination, Keyboard, Mousewheel, Navigation } from 's
 @Component({
   selector: 'app-plagas-importantes',
   standalone: true,
-  imports: [CommonModule, FormsModule, PlagaCardComponent],
+  imports: [CommonModule, FormsModule, PlagaCardComponent, ScrollRevealDirective],
   templateUrl: './plagas-importantes.html',
   styleUrls: ['./plagas-importantes.css']
 })

@@ -1,13 +1,14 @@
 // src/app/components/inicio/inicio.ts
 import { Component, OnInit, OnDestroy, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 import { DatosEmpresaService } from '../../services/datos-empresa';
 import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ScrollRevealDirective],
   templateUrl: './inicio.html',
   styleUrls: ['./inicio.css']
 })
