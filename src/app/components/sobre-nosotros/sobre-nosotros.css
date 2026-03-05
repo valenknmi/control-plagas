@@ -345,28 +345,57 @@
 
 .valores-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: stretch;
 }
 
 .valor-card {
-  background: white;
-  padding: 30px;
+  background: transparent;
+  padding: 25px 20px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
   position: relative;
   transition: all 0.3s;
-  border: 1px solid rgba(76, 175, 80, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.valor-card>* {
+  position: relative;
+  z-index: 2;
+}
+
+.valor-card::before {
+  content: '';
+  position: absolute;
+  width: 1500px;
+  height: 1500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg, transparent 70%, #2d5a27, #4caf50);
+  animation: spin-light 4s linear infinite;
+  z-index: -2;
+}
+
+.valor-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: white;
+  border-radius: 13px;
+  z-index: -1;
 }
 
 .valor-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(76, 175, 80, 0.1);
-  border-color: #4caf50;
+  box-shadow: 0 15px 30px rgba(76, 175, 80, 0.2);
 }
 
 .valor-icon {
@@ -503,6 +532,10 @@
 
   .mision-vision-grid {
     grid-template-columns: 1fr;
+  }
+
+  .valores-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .section-header h2 {
