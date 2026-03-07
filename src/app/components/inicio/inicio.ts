@@ -63,10 +63,11 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   gap = 40;
   numberSize = 50;
   ease = "sine.inOut";
-  clicks = 0;
+  isAnimating = false;
   timer: any;
 
   private isBrowser: boolean;
+  private _destroyed = false;
 
   constructor(
     private datosService: DatosEmpresaService,
@@ -89,6 +90,7 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
+    this._destroyed = true;
     if (this.timer) {
       clearTimeout(this.timer);
     }
@@ -222,9 +224,21 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  step(): Promise<void> {
+  step(direction: 'next' | 'prev' = 'next'): Promise<void> {
     return new Promise((resolve) => {
-      this.order.push(this.order.shift()!);
+      if (this.isAnimating) {
+        resolve();
+        return;
+      }
+      this.isAnimating = true;
+
+      const oldActive = this.order[0];
+
+      if (direction === 'next') {
+        this.order.push(this.order.shift()!);
+      } else {
+        this.order.unshift(this.order.pop()!);
+      }
       this.detailsEven = !this.detailsEven;
 
       const detailsActive = this.detailsEven ? "#details-even" : "#details-odd";
@@ -243,16 +257,14 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
         delay: 0.35,
         duration: 0.4,
         ease: this.ease,
-        onComplete: () => resolve(),
       });
       gsap.set(detailsInactive, { zIndex: 12 });
 
       const [active, ...rest] = this.order;
-      const prv = rest[rest.length - 1];
 
-      gsap.set(this.getCard(prv), { zIndex: 10 });
+      gsap.set(this.getCard(oldActive), { zIndex: 10 });
       gsap.set(this.getCard(active), { zIndex: 20 });
-      gsap.to(this.getCard(prv), { scale: 1.5, duration: 1.0, ease: this.ease });
+      gsap.to(this.getCard(oldActive), { scale: 1.5, duration: 1.0, ease: this.ease });
 
       gsap.to(this.getCardContent(active), {
         y: this.offsetTop + this.cardHeight - 10,
@@ -260,8 +272,15 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
         duration: 0.3,
         ease: this.ease,
       });
+
+      if (direction === 'prev') {
+        gsap.set(this.getSliderItem(active), { x: -this.numberSize });
+        gsap.to(this.getSliderItem(oldActive), { x: this.numberSize, duration: 1.0, ease: this.ease });
+      } else {
+        gsap.to(this.getSliderItem(oldActive), { x: -this.numberSize, duration: 1.0, ease: this.ease });
+      }
       gsap.to(this.getSliderItem(active), { x: 0, duration: 1.0, ease: this.ease });
-      gsap.to(this.getSliderItem(prv), { x: -this.numberSize, duration: 1.0, ease: this.ease });
+
       gsap.to(".progress-sub-foreground", {
         width: 500 * (1 / this.order.length) * (active + 1),
         duration: 1.0,
@@ -277,9 +296,11 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
         height: window.innerHeight,
         borderRadius: 0,
         onComplete: () => {
-          const xNew = this.offsetLeft + (rest.length - 1) * (this.cardWidth + this.gap);
-          gsap.set(this.getCard(prv), {
-            x: xNew,
+          const indexInRest = rest.indexOf(oldActive);
+          const xNewOldActive = this.offsetLeft + indexInRest * (this.cardWidth + this.gap);
+
+          gsap.set(this.getCard(oldActive), {
+            x: xNewOldActive,
             y: this.offsetTop,
             width: this.cardWidth,
             height: this.cardHeight,
@@ -288,13 +309,16 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
             scale: 1,
           });
 
-          gsap.set(this.getCardContent(prv), {
-            x: xNew,
+          gsap.set(this.getCardContent(oldActive), {
+            x: xNewOldActive,
             y: this.offsetTop + this.cardHeight - 100,
             opacity: 1,
             zIndex: 40,
           });
-          gsap.set(this.getSliderItem(prv), { x: rest.length * this.numberSize });
+
+          if (direction === 'next') {
+            gsap.set(this.getSliderItem(oldActive), { x: rest.length * this.numberSize });
+          }
 
           gsap.set(detailsInactive, { opacity: 0 });
           gsap.set(`${detailsInactive} .text`, { y: 100 });
@@ -302,15 +326,14 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
           gsap.set(`${detailsInactive} .title-2`, { y: 100 });
           gsap.set(`${detailsInactive} .desc`, { y: 50 });
           gsap.set(`${detailsInactive} .cta`, { y: 60 });
-          this.clicks -= 1;
-          if (this.clicks > 0) {
-            this.step();
-          }
+
+          this.isAnimating = false;
+          resolve();
         },
       });
 
       rest.forEach((i, index) => {
-        if (i !== prv) {
+        if (i !== oldActive) {
           const xNew = this.offsetLeft + index * (this.cardWidth + this.gap);
           gsap.set(this.getCard(i), { zIndex: 30 });
           gsap.to(this.getCard(i), {
@@ -339,9 +362,11 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async loop() {
+    if (this._destroyed) return;
     gsap.to(".indicator", { x: 0, duration: 2.0 });
     gsap.to(".indicator", { x: window.innerWidth, delay: 2.3, duration: 0.8 });
-    await this.step();
+    await this.step('next');
+    if (this._destroyed) return;
     this.timer = setTimeout(() => {
       gsap.set(".indicator", { x: -window.innerWidth });
       this.loop();
@@ -349,20 +374,33 @@ export class Inicio implements OnInit, OnDestroy, AfterViewInit {
   }
 
   nextSlide() {
-    this.clicks++;
-    if (this.clicks === 1) {
-      if (this.timer) clearTimeout(this.timer);
-      gsap.set(".indicator", { x: -window.innerWidth });
-      this.step().then(() => {
-        if (this.clicks === 0) {
-          this.loop();
-        }
-      });
-    }
+    if (this.isAnimating) return;
+    if (this.timer) clearTimeout(this.timer);
+
+    gsap.killTweensOf(".indicator");
+    gsap.set(".indicator", { x: -window.innerWidth });
+
+    this.step('next').then(() => {
+      if (this._destroyed) return;
+      this.timer = setTimeout(() => {
+        this.loop();
+      }, 3100);
+    });
   }
 
   prevSlide() {
-    this.nextSlide();
+    if (this.isAnimating) return;
+    if (this.timer) clearTimeout(this.timer);
+
+    gsap.killTweensOf(".indicator");
+    gsap.set(".indicator", { x: -window.innerWidth });
+
+    this.step('prev').then(() => {
+      if (this._destroyed) return;
+      this.timer = setTimeout(() => {
+        this.loop();
+      }, 3100);
+    });
   }
 
   // 🎯 MÉTODO DE SCROLL
