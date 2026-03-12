@@ -70,7 +70,7 @@ export class DatosEmpresaService {
         },
         {
           nombre: 'Compromiso',
-          descripcion: 'Estamos dedicados al éxito de nuestros clientes',
+          descripcion: 'Estamos dedicados al éxito y satisfacción de nuestros clientes',
           icono: 'fas fa-handshake'
         }
       ]

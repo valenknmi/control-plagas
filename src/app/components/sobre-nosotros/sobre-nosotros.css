@@ -428,9 +428,11 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  font-size: 2rem;
+  font-size: 2rem !important;
   font-weight: 800;
   color: rgba(76, 175, 80, 0.1);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Certificaciones */
