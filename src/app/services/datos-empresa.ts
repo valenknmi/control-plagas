@@ -46,7 +46,7 @@ export class DatosEmpresaService {
       email: 'info@agroprotect.com',
       direccion: 'Av. Agricultura 123, Ciudad Agroindustrial',
       mision: 'Proveer soluciones innovadoras y sostenibles para el control de plagas en cultivos de caña, maximizando la productividad mientras preservamos el medio ambiente para futuras generaciones.',
-      vision: 'Ser la empresa líder en América Latina en soluciones fitosanitarias para caña de azúcar, reconocida por nuestra innovación, efectividad y compromiso con la agricultura sostenible.',
+      vision: 'Ser la empresa líder en México en soluciones fitosanitarias para caña de azúcar, reconocida por nuestra innovación, efectividad y compromiso con la agricultura sostenible.',
       valores: [
         {
           nombre: 'Sostenibilidad',
